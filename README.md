@@ -114,6 +114,10 @@ SSH Brute Force using NetExec
 now we can use the command to bruteforce SSH  >< :)
 
 
+![image](https://github.com/user-attachments/assets/7ef51a40-a716-428a-923a-f4c446d8e599)
+
+
+![image](https://github.com/user-attachments/assets/89f83e58-970f-4b18-b4cd-ad16819a6f7f)
 
 
 
