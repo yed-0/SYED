@@ -129,9 +129,9 @@ now we can use the command to bruteforce SSH  >< :)
 - Payload: Use common user/password list
 
 
-![image](https://github.com/user-attachments/assets/1899208a-cc12-4a53-9e37-bb86b6b6b536)
 
-![image](https://github.com/user-attachments/assets/9bcebb48-22be-4001-b865-1281a018e81e)
+
+
 
 
 
@@ -142,15 +142,26 @@ Open Burp Suite.Go to the target tab and click "open browser".
 ![image](https://github.com/user-attachments/assets/f8402202-01e8-4468-b51e-078418d4eb95)
 
 
+
+
+
+2. Capture HTTP Login Request
+Navigate to the login page and login using "admin" "password".
+
+
+![image](https://github.com/user-attachments/assets/1899208a-cc12-4a53-9e37-bb86b6b6b536)
+
+
 Enable "Intercept is ON" in Burp → Proxy tab.
 
 ![image](https://github.com/user-attachments/assets/945f16f0-0563-4bbd-a8d9-8e985322bcdb)
 
 
-2. Capture HTTP Login Request
-Navigate to the login page.
+Now we  move to the bruteforce tab Then enter any username or pass
 
-Enter any test credentials (e.g., test:test) and submit.
+![image](https://github.com/user-attachments/assets/9bcebb48-22be-4001-b865-1281a018e81e)
+
+
 
 Burp will intercept the GET request:
 right click on the GET reqquest and choose send to intruders.
