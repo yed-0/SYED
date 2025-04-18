@@ -298,5 +298,29 @@ Examine the captured SSH packets and we are good enough :)
 
 
 
+### Problems & Solutions
+## Problems We Faced:
+# 1. Too Many Usernames
 
+- Metasploitable 2 had hundreds of usernames
 
+- Made it hard to find real ones
+
+# 2. Brute Force Mistakes
+
+-BurpSuite payload setup was tricky
+
+-Wrong settings = failed attacks
+
+# 3. Unencrypted Logins
+
+-Saw all passwords clearly in FTP/TELNET
+
+-Couldn't see anything in SSH (good!)
+
+## Solutions:
+-Lock accounts after 5 wrong tries
+- Add CAPTCHA
+- Use  SFTP/SSH instead (encrypted)
+- Always use HTTPS
+- Show same error for wrong user/pass
