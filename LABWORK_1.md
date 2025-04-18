@@ -222,4 +222,81 @@ paste it in the browser and you should success!
 
 
 
+### ✅Wireshark Traffic Analysis:  Credential Transmission Across Protocols
+
+## Tools Used
+Tools: Wireshark
+
+Target machine: 192.168.100.131
+
+Attacker machine: kali
+
+## 1. Capturing FTP Credentials
+Procedure:
+Launch Wireshark and start capturing on your active network interface
+
+In your terminal, connect to the FTP service: (ftp 192.168.100.131)
+
+
+![image](https://github.com/user-attachments/assets/f138e5bf-d857-48e3-9744-bd0fadc2a9c2)
+
+In Wireshark, apply the filter: "ftp || tcp.port == 21"
+
+![image](https://github.com/user-attachments/assets/1a333376-8ce1-4417-8470-47fc3e2572ac)
+
+
+Locate a packet with USER msfadmin in the Info column
+
+
+![image](https://github.com/user-attachments/assets/e2107f79-bb44-49f3-a654-99148a345159)
+
+
+
+Right-click → Follow → TCP Stream to view the complete session
+
+
+![image](https://github.com/user-attachments/assets/3a6ef18d-aefb-4b33-9a69-b385e9e7b242)
+
+
+
+### 2. Capturing TELNET Credentials
+## Procedure:
+In your terminal, connect to the TELNET service:"telnet 192.168.100.131"
+
+
+![image](https://github.com/user-attachments/assets/2c65e88e-a27f-40e7-afb5-b0a67efad4f3)
+
+
+In Wireshark, apply the filter:"telnet || tcp.port == 23"
+Examine the packet list for TELNET traffic.
+Right-click → Follow → TCP Stream to view the session.
+
+
+![image](https://github.com/user-attachments/assets/ebf2e7d2-322c-4c81-b819-7ef910b8d6c6)
+
+
+### 3. Analyzing SSH Traffic
+## Procedure:
+Initiate an SSH session:"ssh -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedKeyTypes=+ssh-rsa msfadmin@192.168.100.131"
+
+
+![image](https://github.com/user-attachments/assets/32a14aef-d32a-4c26-9f95-8bd4dbb1f9f8)
+
+In Wireshark, apply the filter:"ssh || tcp.port == 22"
+
+
+![image](https://github.com/user-attachments/assets/b9728d00-03f8-4748-9a46-96c5840bbbf5)
+
+
+
+Examine the captured SSH packets and we are good enough :)
+
+![image](https://github.com/user-attachments/assets/04429230-8084-4e15-9a8b-87a0343c1662)
+
+
+![image](https://github.com/user-attachments/assets/90bd1f50-5819-450b-b19f-db3adb5c7222)
+
+
+
+
 
