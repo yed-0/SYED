@@ -21,7 +21,7 @@ I try to connect to the database using:
  ```
 but it shows error ><
 
-![alt text](screenshot/mysql_error.png)
+![alt text](Screenshot/mysql_error.png)
 
 **WHY DOES THIS HAPPEN?**
 
@@ -37,7 +37,7 @@ mysql -h 192.168.100.131 -u root --ssl=off
 *by doing this we have disable SSL and bypasses the error but our credentials are not secured as it is not encrypted*
 
 
-![alt text](screenshot/mysql-success.png)
+![alt text](Screenshot/mysql-success.png)
 
 
 ### 2. USER ENUMERATION AND WEAK AUTHENTICATION
@@ -63,7 +63,7 @@ use dvwa;
 ```
 
 
-![alt text](screenshot/use-dvwa.png)
+![alt text](Screenshot/use-dvwa.png)
 
 
 we will need to list the table so use:
@@ -74,7 +74,7 @@ show tables;
 ```
 
 
-![alt text](screenshot/show-tables.png)
+![alt text](Screenshot/show-tables.png)
 
 
 
@@ -89,7 +89,7 @@ select * from users;
 ```
 
 
-![alt text](screenshot/users-database.png)
+![alt text](Screenshot/users-database.png)
 
 
 
@@ -114,7 +114,7 @@ hash-identifier
 ```
 
 
-![alt text](screenshot/hash-id.png)
+![alt text](Screenshot/hash-id.png)
 
 
 
@@ -122,7 +122,7 @@ enter the hash and we will get the result !!
 
 
 
-![alt text](screenshot/identifier-result.png)
+![alt text](Screenshot/identifier-result.png)
 
 
 
@@ -138,7 +138,7 @@ echo "5f4dcc3b5aa765d61d8327deb882cf99">hash.txt
 ```
 
 
-![alt text](screenshot/hash-txt.png)
+![alt text](Screenshot/hash-txt.png)
 
 
 
@@ -151,7 +151,7 @@ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
 ```
 
 
-![alt text](screenshot/pass-crack.png)
+![alt text](Screenshot/pass-crack.png)
 
 
 fnally now we can show the password using:
@@ -162,7 +162,7 @@ john --show --format=raw-md5 hash.txt
 ```
 
 
-![alt text](screenshot/crack-result.png)
+![alt text](Screenshot/crack-result.png)
 
 
 
