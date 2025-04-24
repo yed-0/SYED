@@ -18,5 +18,6 @@ I try to connect to the database using:
  ```bash 
  my sql -h 192.168.100.131
  ```
-but it shows error :(
+but it shows error ><
 
+![alt text](image-1.png)
