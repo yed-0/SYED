@@ -33,11 +33,13 @@ we need to disabled SSL so we can make a connection. Use:
 mysql -h 192.168.100.131 -u root --ssl=off
 ```
 *by doing this we have disable SSL and bypasses the error but our credentials are not secured as it is not encrypted*
+
 ![alt text](image-2.png)
 
 ### 2. USER ENUMERATION AND WEAK AUTHENTICATION
 
 next step is to gte the information about the database using:
+
 ```bash
 show databases;
 ```
@@ -46,6 +48,7 @@ show databases;
 *here we can see the dvwa which are vulnerable*
 
 so we will be needing to look trough dvwa table using:
+
 ```bash 
 use dvwa;
 ```
@@ -53,21 +56,27 @@ use dvwa;
 ![alt text](image-4.png)
 
 we will need to list the table so use:
+
 ```bash
 show tables;
 ```
+
 ![alt text](image-5.png)
 
 *as we found user's database now we can use it*
 
 try too look for passwords in users database using:
+
 ```bash
 select * from users;
 ```
 
 ![alt text](image-7.png)
+
 *From this output it seems like user admin and smithy have the same password which is:*
+
 ```bash
 5f4dcc3b5aa765d61d8327deb882cf99
 ```
+
 Now lets try to figure out what kind of hash is that.
