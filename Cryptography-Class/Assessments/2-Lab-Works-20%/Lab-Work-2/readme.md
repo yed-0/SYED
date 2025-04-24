@@ -75,10 +75,29 @@ select * from users;
 
 ![alt text](image-7.png)
 
-*From this output it seems like user admin and smithy have the same password which is:*
+*From this output we can crack the password that we choose.In this case i choose admin's passwords which is:*
 
 ```bash
 5f4dcc3b5aa765d61d8327deb882cf99
 ```
 
 Now lets try to figure out what kind of hash is that.
+
+### 3. PASSWORD HASH DISCOVERY AND HASH IDENTIFICATION
+
+we will be using hash-identifier tool. To open it using kali type :
+
+```bash 
+hash-identifier
+```
+
+![alt text](image-8.png)
+
+
+enter the hash and we will get the result !!
+
+![alt text](image-9.png)
+
+4.CRACK THE PASSWORD
+
+
