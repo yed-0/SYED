@@ -14,7 +14,9 @@ Total Marks: 15*
 
 ## LAB TASK
 ### 1. Service enumeration and initial access
-I try to connect to the database but it shows error :(
-    ```bash 
-     my sql -h 192.168.100.131
-     ```
+I try to connect to the database using:
+ ```bash 
+ my sql -h 192.168.100.131
+ ```
+but it shows error :(
+
