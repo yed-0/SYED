@@ -15,6 +15,7 @@ Total Marks: 15*
 ## LAB TASK
 ### 1. Service enumeration and initial access
 I try to connect to the database using:
+
  ```bash 
  my sql -h 192.168.100.131
  ```
@@ -27,6 +28,7 @@ but it shows error ><
 This is because  MySQL Server  enforcing SSL/TLS, but the client and server disagree on the encryption protocol version.
 
 **HOW TO FIX IT?**
+
 we need to disabled SSL so we can make a connection. Use:
 
 ```bash
