@@ -103,3 +103,32 @@ enter the hash and we will get the result !!
 4. CRACK THE PASSWORD
 
 
+
+create file hash.txt and paste the hash in it. Use :
+```
+echo "5f4dcc3b5aa765d61d8327deb882cf99">hash.txt  
+```
+
+
+![hash-txt](image-10.png)
+
+
+Then we will need to crack it using john the reaper. Use:
+
+
+```
+john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+```
+
+
+fnally now we can show the password using:
+
+```
+john --show --format=raw-md5 hash.txt 
+```
+
+
+
+![alt text](show-password.png)
+
