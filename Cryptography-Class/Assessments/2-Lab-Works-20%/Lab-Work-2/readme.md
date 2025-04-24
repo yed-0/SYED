@@ -49,7 +49,7 @@ show databases;
 ```
 
 
-![alt text](screenshot/show-databases.png)
+![alt text](Screenshot/show-databases.png)
 
 
 
