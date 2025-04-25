@@ -14,26 +14,49 @@ Total Marks: 15*
 
 ## LAB TASK
 ### 1. Service enumeration and initial access
+
+### **run scan to see open port for my sql**
+
+run n map scan to look for mysql port . Use:
+
+
+```bash
+nmap -sS -sV -p- 192.168.100.131
+```
+*we can see that our target's my sql port is available which is port 3306.*
+
+
+![alt text](Screenshot/nmap-scan.png.png)
+
+
 I try to connect to the database using:
+
 
  ```
  my sql -h 192.168.100.131
  ```
+
+
 but it shows error ><
+
 
 ![alt text](Screenshot/mysql_error.png)
 
-**WHY DOES THIS HAPPEN?**
+
+### **WHY DOES THIS HAPPEN?**
 
 This is because  MySQL Server  enforcing SSL/TLS, but the client and server disagree on the encryption protocol version.
 
-**HOW TO FIX IT?**
+### **HOW TO FIX IT?**
 
 we need to disabled SSL so we can make a connection. Use:
+
 
 ```
 mysql -h 192.168.100.131 -u root --ssl=off
 ```
+
+
 *by doing this we have disable SSL and bypasses the error but our credentials are not secured as it is not encrypted*
 
 
@@ -42,7 +65,8 @@ mysql -h 192.168.100.131 -u root --ssl=off
 
 ### 2. USER ENUMERATION AND WEAK AUTHENTICATION
 
-next step is to gte the information about the database using:
+next step is to get the information about the database using:
+
 
 ```bash
 show databases;
@@ -157,12 +181,12 @@ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
 fnally now we can show the password using:
 
 
-```
-john --show --format=raw-md5 hash.txt 
+```bash
+cat ~/.john/john.pot 
 ```
 
 
-![alt text](Screenshot/crack-result.png)
+![alt text](Screenshot/john-pot.png)
 
 
 
