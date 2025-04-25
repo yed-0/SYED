@@ -61,7 +61,49 @@ show databases;
 
 ![show databases](Screenshot/show-databases.png)
 
-We switch to the vulnerable `dvwa` database:
+
+then we will need to get into mysql databases to look wether there is or isn't password of the user. Use :
+
+```bash
+use mysql;
+```
+
+then show the mysql tables. Use :
+
+
+```bash
+show tables;
+```
+
+
+![alt text](Screenshot/show-tables-mysql.png)
+
+so now we can show user,host and password using:
+
+
+```bash
+select user,host,password from user;
+```
+
+
+![alt text](Screenshot/user-host-password.png)
+
+*this shows that there are no passsword for these user*
+
+## ⚠️ QUESTION:
+
+**- Is accessing a database with no password a cryptographic failure?** 
+
+*yes because Cryptographic systems rely on secure key-based access, such as passwords or certificates, to prove identity.*
+
+
+**- How does this violate secure cryptographic authentication principles??** 
+
+*It breaks authentication because there’s no way to verify who’s connecting. Without a password or encryption, anyone can access the system without proving their identity.*
+
+
+
+**NOW** let's  switch to the vulnerable `dvwa` database:
 
 ```bash
 use dvwa;
@@ -92,21 +134,6 @@ From the output, we identify a **hashed password for the `admin` user**:
 ```
 
 ---
-
-
-## ⚠️ QUESTION:
-
-**- Is accessing a database with no password a cryptographic failure?** 
-
-*yes because Cryptographic systems rely on secure key-based access, such as passwords or certificates, to prove identity.*
-
-
-**- How does this violate secure cryptographic authentication principles??** 
-
-
-*It breaks authentication because there’s no way to verify who’s connecting. Without a password or encryption, anyone can access the system without proving their identity.*
-
-
 
 
 
