@@ -93,6 +93,23 @@ From the output, we identify a **hashed password for the `admin` user**:
 
 ---
 
+
+## ⚠️ QUESTION:
+
+**- Is accessing a database with no password a cryptographic failure?** 
+
+*yes because Cryptographic systems rely on secure key-based access, such as passwords or certificates, to prove identity.*
+
+
+**- How does this violate secure cryptographic authentication principles??** 
+
+
+*It breaks authentication because there’s no way to verify who’s connecting. Without a password or encryption, anyone can access the system without proving their identity.*
+
+
+
+
+
 ### 3. Hash Type Identification
 
 We identify the hash type using the tool `hash-identifier`:
@@ -109,6 +126,14 @@ Enter the hash and observe the result:
 > The tool identifies it as **MD5**, a widely used but insecure hashing algorithm.
 
 ---
+
+
+## ⚠️ QUESTION:
+
+**-  What cryptographic weaknesses exist in this hashing method?** 
+
+*The hash uses MD5, which is outdated, fast to crack, not salted, and vulnerable to attacks. It's easy for attackers to reverse it using tools like John the Ripper.*
+
 
 ### 4. Cracking the Password
 
@@ -133,6 +158,7 @@ Finally, view the cracked password:
 ```bash
 cat ~/.john/john.pot
 ```
+
 
 ![john pot output](Screenshot/john-pot.png)
 
