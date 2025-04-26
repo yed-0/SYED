@@ -144,3 +144,112 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 *if it doesn't match:*
 
 ![alt text](screenshot/compare-rsa-fail.png)
+
+## **Task 3:  Hashing and Message Integrity using SHA-256**
+
+**Objective: Generate a hash of a file and verify its integrity.**
+
+
+**STEPS:**
+
+### 1. Create a sample file
+
+**command:**
+```bash
+echo "anything" > filename
+```
+
+**example:**
+
+![alt text](screenshot/create-txt-hash.png)
+
+
+### 2. Generate SHA-256 hash
+
+**command:**
+```bash
+openssl dgst -sha256 filename
+```
+
+**example:**
+
+![alt text](screenshot/hash-generate.png)
+
+### 3. Modify the file slightly 
+
+**command:**
+
+```bash
+echo "anything" > filename
+```
+
+**example:**
+
+![alt text](screenshot/modified-txt-hash.png)
+
+### 4. regenerate the hash and check it
+
+**command:**
+
+```bash
+openssl dgst -sha256 filename
+```
+
+**example:**
+
+![alt text](screenshot/modified-hash-generate.png)
+
+
+## **Task 4:  Digital Signatures using RSA & SHA-256**
+
+**Objective: Sign a file and verify the signature.**
+
+
+**STEPS:**
+
+### 1. Sign the file using Private Key
+
+**command:**
+```bash
+openssl dgst -sha256 -sign filename -out filename filename
+```
+
+**example:**
+
+![alt text](screenshot/signfile.png)
+
+### 2. Verify the Signature using Public Key
+
+**command:**
+```bash
+openssl dgst -sha256 -verify filename -signature filename filename
+```
+
+**example:**
+![alt text](screenshot/verify-signature.png)
+
+### 3. Tamper the file
+
+**command:**
+```bash
+echo "anything" > filename
+```
+
+**example:**
+
+![alt text](screenshot/tamperfile.png)
+
+
+### 4. Verify again
+
+**command:**
+```bash
+openssl dgst -sha256 -verify filename -signature filename filename
+
+```
+
+**example:**
+
+![alt text](screenshot/verify-signature-2.png)
+
+
