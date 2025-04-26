@@ -137,7 +137,7 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 **example:**
 
-*if it is match: *
+*if it is match:*
 
 ![alt text](screenshot/compare-rsa.png)
 
