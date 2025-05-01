@@ -33,7 +33,10 @@ after you follow me step by step on this labwork,you will be able to :
 
 **example:**
 
-![alt text](screenshot/create-txt.png)
+![alt text](screenshot/syed-txt.png)
+
+
+
 
 ###  2. encrypt the file using AES-256-CBC.
 
@@ -44,7 +47,7 @@ after you follow me step by step on this labwork,you will be able to :
 
 **example:**
 
-![alt text](screenshot/encryptfile.png)
+![alt text](screenshot/aes-enc.png)
 
 
 ###  3. Decrypt the file
@@ -57,19 +60,19 @@ openssl enc -aes-256-cbc -d -in filename.txt.enc -out filename.txt
 
 **example:**
 
-![alt text](screenshot/decryptfile.png)
+
 
 ### 4.  Verify the decrypted content matches the original
 
 **command:**
 ```bash
-cat filename.txt
-cat filename.txt
+cat filename.txt filename.txt.decrypt
+
 ```
 
 **example:**
 
-![alt text](screenshot/comparision-aes.png)
+![alt text](screenshot/aes-compare.png)
 
 ## **Task 2: Asymmetric Encryption using RSA**
 
@@ -111,7 +114,7 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 **example:**
 
-![alt text](screenshot/encrypted-pubkey.png)
+
 
 
 ### 4. Decrypt using the private key
@@ -123,14 +126,14 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 **example:**
 
-![alt text](screenshot/decrypt-result.png)
+
 
 
 ### 5. Verify the decrypted message matches the original.
 
 **command:**
 ```bash
-   diff gymbro.txt rsa.dec.file
+   diff filename.txt filname.txt.decrypt
 ```
 *if there is nothing came out then it matches but if it is not match then the different will be shown.*
 
@@ -139,11 +142,10 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 *if it is match:*
 
-![alt text](screenshot/compare-rsa.png)
+
 
 *if it doesn't match:*
 
-![alt text](screenshot/compare-rsa-fail.png)
 
 ## **Task 3:  Hashing and Message Integrity using SHA-256**
 
@@ -185,7 +187,7 @@ echo "anything" > filename
 
 **example:**
 
-![alt text](screenshot/modified-txt-hash.png)
+
 
 ### 4. regenerate the hash and check it
 
@@ -197,7 +199,7 @@ openssl dgst -sha256 filename
 
 **example:**
 
-![alt text](screenshot/modified-hash-generate.png)
+
 
 
 ## **Task 4:  Digital Signatures using RSA & SHA-256**
@@ -216,17 +218,17 @@ openssl dgst -sha256 -sign filename -out filename filename
 
 **example:**
 
-![alt text](screenshot/signfile.png)
+![alt text](screenshot/sign-file.png)
 
 ### 2. Verify the Signature using Public Key
 
 **command:**
 ```bash
-openssl dgst -sha256 -verify filename -signature filename filename
+openssl dgst -sha256 -verify filename -signature filename.sign filename
 ```
 
 **example:**
-![alt text](screenshot/verify-signature.png)
+
 
 ### 3. Tamper the file
 
@@ -237,7 +239,7 @@ echo "anything" > filename
 
 **example:**
 
-![alt text](screenshot/tamperfile.png)
+
 
 
 ### 4. Verify again
@@ -250,6 +252,6 @@ openssl dgst -sha256 -verify filename -signature filename filename
 
 **example:**
 
-![alt text](screenshot/verify-signature-2.png)
+
 
 
