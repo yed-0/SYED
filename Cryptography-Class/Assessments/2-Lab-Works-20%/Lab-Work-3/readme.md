@@ -243,7 +243,16 @@ HOIokZrO9ZY/LqxMjfTMkN+uMZKOwyRXwqQSdQAYdsrw2yKBeeKvgg6S/GYNAwOE
 
 **example:**
 
+```bash
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ openssl pkeyutl -encrypt -inkey public.key -pubin -in secret.txt -out secret.enc
 
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ cat secret.enc  
+�HV▒$�$
+       0���f�7,b�����6�U��g����wz4��������▒���[��{r��"�.�~���A��㛌�ᠮ{�k2J��o�E��=1N�{�x'��+[UN�����*���&I���#;3�6����|Y���J6�\$}E�~N���{4C5NaJsT�s�����-SF#���Jj��&�ZF��n;�5}����ܗ�Ma&o+��&�_H���.�
+                         I��nڇ�#*��ī�!�S����r�I���<   
+```
 
 
 ### 4. Decrypt using the private key
@@ -348,8 +357,18 @@ echo "anything" > filename
 **example:**
 
 ```bash
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-3]
+└─$ cat info.txt                 
+27/6/2025 12.A.M lobby
+                                                                                                                              
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-3]
+└─$ echo "\n\n\nHope syed did not see this comming" >> info.txt                      
+                                                                                                                              
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-3]
+└─$ cat info.txt 
+27/6/2025 12.A.M lobby
 
-
+Hope syed did not see this comming   
 ```
 
 ### 4. regenerate the hash and check it
@@ -362,7 +381,16 @@ openssl dgst -sha256 filename
 
 **example:**
 
+```bash
+┌──(syed㉿NWS23010037)-[~]                                                                                          
+└─$ openssl dgst -sha256 info1.txt 
+SHA2-256(info1.txt)= 8c012278b413e1d1c18536553d8784f7436b0996b9b6b1fb95f50acae8d42556                               
+                                                                                                                    
+┌──(syed㉿NWS23010037)-[~]                                                                                          
+└─$ openssl dgst -sha256 info.txt 
+SHA2-256(info.txt)= 6cca854084069003bec800a1dd1b07cf54f8da311f3db783afa095ab03693d45
 
+```
 
 
 ## **Task 4:  Digital Signatures using RSA & SHA-256**
