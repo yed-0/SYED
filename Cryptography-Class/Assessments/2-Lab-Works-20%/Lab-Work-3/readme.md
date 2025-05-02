@@ -277,12 +277,23 @@ hi syed, long time no see... here secret message for you :143
 
 **example:**
 
-*if it is match:*
-
-
-
-*if it doesn't match:*
-
+   ```bash                                                                                  
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ cat secret.decrypt secret.txt
+hi syed, long time no see... here secret message for you :143
+hi syed, long time no see... here secret message for you :143
+                                                                                     
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ ll secret.decrypt secret.txt
+-rw-rw-r-- 1 adamriezqie adamriezqie 62 May  2 14:22 secret.decrypt
+-rw-rw-r-- 1 adamriezqie adamriezqie 62 May  2 13:30 secret.txt
+                                                                                     
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ diff secret.decrypt secret.txt
+                                                                                     
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-2]
+└─$ 
+```
 
 ## **Task 3:  Hashing and Message Integrity using SHA-256**
 
@@ -300,8 +311,15 @@ echo "anything" > filename
 
 **example:**
 
-![alt text](screenshot/create-txt-hash.png)
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ echo "27/6/2025 12.A.M lobby" > info.txt
 
+┌──(syed㉿NWS23010037)-[~]
+└─$ cat info.txt 
+27/6/2025 12.A.M lobby
+
+```
 
 ### 2. Generate SHA-256 hash
 
@@ -312,7 +330,12 @@ openssl dgst -sha256 filename
 
 **example:**
 
-![alt text](screenshot/hash-generate.png)
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl dgst -sha256 info.txt 
+SHA2-256(info.txt)= 6cca854084069003bec800a1dd1b07cf54f8da311f3db783afa095ab03693d45
+```
+
 
 ### 3. Modify the file slightly 
 
@@ -324,7 +347,10 @@ echo "anything" > filename
 
 **example:**
 
+```bash
 
+
+```
 
 ### 4. regenerate the hash and check it
 
