@@ -136,15 +136,14 @@ diff filename filename.decrypt
 └─$ diff syed.txt syed.decrypt 
                                                                                                                                                                                                     
 ┌──(syed㉿NWS23010037)-[~]                                      
-└─$                                                                                                                                     
-                
+└─$                                                                                                                                                   
 ```
 
-![alt text](SCREENSHOT/LL-AES.jpg)
+![alt text](screenshot/LL-AES.jpg)
 
 
 
-![alt text](SCREENSHOT/DIFF-AES.jpg)
+![alt text](screenshot/DIFF-AES.jpg)
 
 ## **Task 2: Asymmetric Encryption using RSA**
 
