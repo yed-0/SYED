@@ -392,7 +392,6 @@ SHA2-256(info.txt)= 6cca854084069003bec800a1dd1b07cf54f8da311f3db783afa095ab0369
 
 ```
 
-
 ## **Task 4:  Digital Signatures using RSA & SHA-256**
 
 **Objective: Sign a file and verify the signature.**
@@ -400,16 +399,24 @@ SHA2-256(info.txt)= 6cca854084069003bec800a1dd1b07cf54f8da311f3db783afa095ab0369
 
 **STEPS:**
 
-### 1. Sign the file using Private Key
+### 1.create and  Sign the file using Private Key
 
 **command:**
 ```bash
+ echo "anything" > filename
 openssl dgst -sha256 -sign filename -out filename filename
 ```
 
 **example:**
 
-![alt text](screenshot/sign-file.png)
+```bash
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ echo "lambat bayar bunga naik" > agreement.txt 
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl dgst -sha256 -sign private.key  -out agreement.sign agreement.txt     
+```
 
 ### 2. Verify the Signature using Public Key
 
