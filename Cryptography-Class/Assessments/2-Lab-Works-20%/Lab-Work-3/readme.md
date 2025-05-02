@@ -1,5 +1,7 @@
 # Lab 3: Hands-on Exploration of Cryptographic Tools: Hashing, Encryption, and Digital Signature
 
+## lab objective 💪
+
 in this lab we will be introduced to openSSL which is a cryptography toolkit.We will be performing essential cryptographic operations such as :
 
 - Symmetric encryption(AES)
@@ -7,18 +9,29 @@ in this lab we will be introduced to openSSL which is a cryptography toolkit.We 
 - Hashing (SHA-256)
 - Digital signatures (RSA with SHA-256)
 
-after you follow me step by step on this labwork,you will be able to :
+ after you follow me step by step on this labwork,you will be able to :
 - Encrypt and decrypt files using symmetric and asymmetric encryption.
 - Generate and verify hashes for data integrity.
 - Create and verify digital signatures.
+
+--- 
+
+##  **Tools Used**:
+
+1. OpenSSL
+2. [Wormhole](https://wormhole.app/) (end-to-end encryption private file sharing)\
+
 
 
  **NOW LETS START** 💪
 
 
+
+--- 
+
 ## **Task 1: Symmetric Encryption using AES**
 
-**Objective: Encrypt and decrypt a file using AES-256 in CBC mode**
+**Objective: Encrypt and decrypt a file using AES-256 in CBC modde.I will encrypt and send it securely to adam so he can decrypt it safely.**
 
 **STEPS:**
 
@@ -39,8 +52,6 @@ after you follow me step by step on this labwork,you will be able to :
 
 ```
 
-
-![alt text](screenshot/syed-txt.png)
 
 
 ###  2. generate key and iv
@@ -67,7 +78,7 @@ bac6130b2c33397a5afbf851cfd0acb9
 
 ```
 
-![alt text](screenshot/key.iv.png)
+
 
 
 
@@ -93,7 +104,7 @@ vlEt�t�����'(��kB�5����4�z��4
 
 ```
 
-![alt text](screenshot/aes-enc.png)
+
 
 ###  4. Decrypt the file
 
@@ -139,11 +150,6 @@ diff filename filename.decrypt
 └─$                                                                                                                                                   
 ```
 
-![alt text](screenshot/LL-AES.jpg)
-
-
-
-![alt text](screenshot/DIFF-AES.jpg)
 
 
 
@@ -426,7 +432,23 @@ openssl dgst -sha256 -verify filename -signature filename.sign filename
 ```
 
 **example:**
+```bash
 
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ cp ../task-2/public.key public.key                                             
+                                                                                                                              
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ ls
+agreement.sign  agreement.txt  public.key
+                                                                                                                              
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ openssl dgst -sha256 -verify public.key -signature agreement.sign agreement.txt
+Verified OK
+                                                                                                                               
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ 
+
+```
 
 ### 3. Tamper the file
 
@@ -437,6 +459,10 @@ echo "anything" > filename
 
 **example:**
 
+```bash
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ echo "\n\n\n\n\n\nHope syed did not see this coming alsooooooo" >> agreement.txt
+```
 
 
 
@@ -449,7 +475,11 @@ openssl dgst -sha256 -verify filename -signature filename filename
 ```
 
 **example:**
-
-
-
+```bash
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads/task-4]
+└─$ openssl dgst -sha256 -verify public.key -signature agreement.sign agreement.txt
+Verification failure
+4067DC4F6A7F0000:error:02000068:rsa routines:ossl_rsa_verify:bad signature:../crypto/rsa/rsa_sign.c:442:
+4067DC4F6A7F0000:error:1C880004:Provider routines:rsa_verify_directly:RSA lib:../providers/implementations/signature/rsa_sig.c:1041:
+```
 
