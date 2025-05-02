@@ -145,6 +145,8 @@ diff filename filename.decrypt
 
 ![alt text](screenshot/DIFF-AES.jpg)
 
+
+
 ## **Task 2: Asymmetric Encryption using RSA**
 
 **Objective: Generate an RSA key pair, encrypt a message with the public key, and decrypt it with the private key.**
@@ -161,7 +163,13 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 **example:**
 
-![alt text](screenshot/generate-rsa.png)
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl genpkey -algorithm RSA -out private.key  -pkeyopt rsa_keygen_bits:2048
+..+..+....+.........+............+++++++++++++++++++++++++++++++++++++++*........+.......+...........+.......+...+..+.......+++++++++++++++++++++++++++++++++++++++*..+..........+.........+...........+.......+..+.........+.......+...+...............+..+............+.+......+....................+........................+.+...+..+...+...+...+.+...+...+...............+..+.....................+.+......+..+.+.........+....................+.+....................+...............+.......+..++++++                                                                                        
+.+.+++++++++++++++++++++++++++++++++++++++*..........+..+.+..+...+.......+++++++++++++++++++++++++++++++++++++++*.......................+..+............+..................+.++++++                                                                         
+
+```
 
 ### 2. Extract the public key
 
@@ -173,7 +181,29 @@ openssl genpkey -algorithm RSA -out filename -pkeyopt rsa_keygen_bits:2048
 
 **example:**
 
-![alt text](screenshot/extract-pub.png)
+```bash
+┌──(syed㉿NWS23010037)-[~]                                                                                          
+└─$ openssl rsa -in private.key -pubout -out public.key                                                             
+writing RSA key
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ cat public.key                                                                                                  
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApqLrQQPcgM6Py2DMgtw8
+1Kwh43yPHuFuPG5V7Z9TCQz3ZN/8m1gOnoDL+8BfM2bm5pZKBQfT9fV7FnZ3oMtk
+MlQoc1ufp8uBRSlF2FWjGJP6VnJ1VdVAdj/iGFweoCfzV/oyKAjnk7FzmLHVjIqM
+yMb1aQp9YUEG+vMdlvLajoPgW+LCqSIC9LVw5KlokaciZyV6LIsvN+q1ue+JDcsj
+HOIokZrO9ZY/LqxMjfTMkN+uMZKOwyRXwqQSdQAYdsrw2yKBeeKvgg6S/GYNAwOE
+/Nw6djCwgGFinVgQnl465TqynT+GGNBD7C0b46S/1ddEoRuomphkto4+CxWNEoXD
+6wIDAQAB
+-----END PUBLIC KEY-----
+
+
+```
+
+
+
+
 
 
 ### 3. Encrypt a message using the public key
