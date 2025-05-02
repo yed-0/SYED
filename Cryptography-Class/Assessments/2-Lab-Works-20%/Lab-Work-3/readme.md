@@ -99,13 +99,22 @@ vlEt�t�����'(��kB�5����4�z��4
 
 **command:**
 ```bash
-openssl enc -aes-256-cbc -d -in filename.txt.enc -out filename.txt
+openssl enc -e -aes-256-cbc -K $(cat filename) -iv $(cat filename) -in filename -out filename
 
 ```
 
 **example:**
+```bash
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads]
+└─$ openssl enc -d -aes-256-cbc -K $(cat key) -iv $(cat iv) -in syed.txt.enc -out syed.decrypt
+                                                                                                         
+┌──(adamriezqie㉿NWS23010043)-[~/Downloads]
+└─$ cat syed.decrypt
+kelisa putih nampak rare
 
+```
 
+![alt text](screenshot/decrypt-aes.jpg)
 
 ### 5.  Verify the decrypted content matches the original
 
@@ -117,7 +126,25 @@ cat filename.txt filename.txt.decrypt
 
 **example:**
 
-![alt text](screenshot/aes-compare.png)
+
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ ll syed.txt syed.decrypt
+-rw-rw-r-- 1 syed syed 25 May  2 00:53 syed.decrypt
+-rw-rw-r-- 1 syed syed 25 May  2 00:05 syed.txt                                                                                                                        
+┌──(syed㉿NWS23010037)-[~]                                       
+└─$ diff syed.txt syed.decrypt 
+                                                                                                                                                                                                    
+┌──(syed㉿NWS23010037)-[~]                                      
+└─$                                                                                                                                     
+                
+```
+
+![alt text](SCREENSHOT/LL-AES.jpg)
+
+
+
+![alt text](SCREENSHOT/DIFF-AES.jpg)
 
 ## **Task 2: Asymmetric Encryption using RSA**
 
