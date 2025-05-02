@@ -36,21 +36,34 @@ after you follow me step by step on this labwork,you will be able to :
 ![alt text](screenshot/syed-txt.png)
 
 
-
-
-###  2. encrypt the file using AES-256-CBC.
+###  2. generate key and iv
 
 **command:**
 ```bash
- openssl enc -aes-256-cbc -salt -in filename.txt -out filename.txt.enc
+openssl rand -hex 32 > filename
+openssl rand -hex 16 > filename
+```
+
+**example:**
+
+![alt text](screenshot/key.iv.png)
+
+
+
+
+###  3. encrypt the file using AES-256-CBC.
+
+**command:**
+```bash
+openssl enc -e -aes-256-cbc -K $(cat key) -iv $(cat iv) -in filename -out filename.enc
+
 ```
 
 **example:**
 
 ![alt text](screenshot/aes-enc.png)
 
-
-###  3. Decrypt the file
+###  4. Decrypt the file
 
 **command:**
 ```bash
@@ -62,7 +75,7 @@ openssl enc -aes-256-cbc -d -in filename.txt.enc -out filename.txt
 
 
 
-### 4.  Verify the decrypted content matches the original
+### 5.  Verify the decrypted content matches the original
 
 **command:**
 ```bash
