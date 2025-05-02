@@ -120,8 +120,8 @@ kelisa putih nampak rare
 
 **command:**
 ```bash
-cat filename.txt filename.txt.decrypt
-
+ll filename filename.decrypt
+diff filename filename.decrypt
 ```
 
 **example:**
