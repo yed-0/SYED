@@ -33,6 +33,13 @@ after you follow me step by step on this labwork,you will be able to :
 
 **example:**
 
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ echo "kelisa putih nampak rare" > "syed.txt"
+
+```
+
+
 ![alt text](screenshot/syed-txt.png)
 
 
@@ -45,6 +52,20 @@ openssl rand -hex 16 > filename
 ```
 
 **example:**
+
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl rand -hex 32 > key
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl rand -hex 16 > iv
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ cat key iv
+595369a67de06fa9619e2cab404180e958e07dc258423b6509b11dfd4c4aa8f3
+bac6130b2c33397a5afbf851cfd0acb9
+
+```
 
 ![alt text](screenshot/key.iv.png)
 
