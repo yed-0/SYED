@@ -82,6 +82,17 @@ openssl enc -e -aes-256-cbc -K $(cat key) -iv $(cat iv) -in filename -out filena
 
 **example:**
 
+
+```bash
+┌──(syed㉿NWS23010037)-[~]
+└─$ openssl enc -e -aes-256-cbc -K $(cat key) -iv $(cat iv) -in syed.txt -out syed.txt.enc
+
+┌──(syed㉿NWS23010037)-[~]
+└─$ cat syed.txt.enc 
+vlEt�t�����'(��kB�5����4�z��4
+
+```
+
 ![alt text](screenshot/aes-enc.png)
 
 ###  4. Decrypt the file
