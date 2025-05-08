@@ -62,6 +62,11 @@ openssl rand -hex 32 > filename
 openssl rand -hex 16 > filename
 ```
 
+> *openssl rand -hex 32 generates a 256-bit (32 bytes) key in hexadecimal.*
+
+> *openssl rand -hex 16 generates a 128-bit IV (Initialization Vector).*
+
+
 **example:**
 
 ```bash
@@ -80,9 +85,6 @@ bac6130b2c33397a5afbf851cfd0acb9
 
 
 
-
-
-
 ###  3. encrypt the file using AES-256-CBC.
 
 **command:**
@@ -90,6 +92,13 @@ bac6130b2c33397a5afbf851cfd0acb9
 openssl enc -e -aes-256-cbc -K $(cat key) -iv $(cat iv) -in filename -out filename.enc
 
 ```
+> *-aes-256-cbc: specifies AES with 256-bit key in CBC mode.*
+
+> *-K and -iv: pass the key and IV in hexadecimal format.*
+
+> *-e: encryption mode.*
+
+
 
 **example:**
 
@@ -125,7 +134,7 @@ kelisa putih nampak rare
 
 ```
 
-![alt text](screenshot/decrypt-aes.jpg)
+
 
 ### 5.  Verify the decrypted content matches the original
 
@@ -482,4 +491,24 @@ Verification failure
 4067DC4F6A7F0000:error:02000068:rsa routines:ossl_rsa_verify:bad signature:../crypto/rsa/rsa_sign.c:442:
 4067DC4F6A7F0000:error:1C880004:Provider routines:rsa_verify_directly:RSA lib:../providers/implementations/signature/rsa_sig.c:1041:
 ```
+
+---
+
+## problem encounted
+**rsautl**: error to use rsautl for encryption,instead use **pkeyutl**
+
+
+## 🔚 Conclusion
+
+In this lab, we learned to use OpenSSL for:
+
+Symmetric encryption with AES-256
+
+Asymmetric encryption with RSA
+
+File integrity verification via SHA-256 hashing
+
+Digital signatures for message authenticity
+
+These are essential cryptographic operations for securing data, ensuring integrity, and validating identity in modern systems.
 
