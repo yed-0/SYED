@@ -65,7 +65,7 @@ Create a file with your message.
 
 **Command** (in terminal, outside closeSSL):
 ```bash
-echo "hi adam syed nak kopi" > syed_message.txt
+echo "Hi adam syed nak kopi" > message.txt
 ```
 
 **Example**:
